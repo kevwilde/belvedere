@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    {% for widget in widgets %}
+        {{ widget.render }}
+    {% endfor %}
+
+{% endblock %}
