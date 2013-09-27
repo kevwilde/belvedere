@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+    <h2>Deployment Overview</h2>
+
+    {% regroup object_list by server.environment as environment_grouped  %}
+
+    <table>
+        <thead>
+        <tr>
+            <th>&nbsp;</th>
+            {% for environment in environment_grouped %}
+            <th colspan="{{ environment.list|length }}">
+                {{ environment.grouper }}
+            </th>
+            {% endfor %}
+        </tr>
+        <tr>
+            {% regroup object_list by server.hostname as hostname_grouped %}
+            {% for hostname in hostname_grouped %}
+                <th>{{ hostname.grouper }}</th>
+            {% endfor %}
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr>
+            <td></td>
+        </tr>
+
+        </tbody>
+
+    </table>
+    {{ environment_grouped }}
+    {% for deployment in environment_grouped.list %}
+        {{ deployment }}
+    {% endfor %}
+
+
+{% endblock %}

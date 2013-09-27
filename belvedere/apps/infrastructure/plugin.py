@@ -8,20 +8,17 @@ widgets and urlpatterns.
 
 """
 from .urls import urlpatterns
-from .widgets import ApplicationListWidget
 
 from apps.common.plugins import manager
 from apps.common.plugins.models import PluginDefinition
 
 
-class ApplicationPlugin(PluginDefinition):
+class InfrastructurePlugin(PluginDefinition):
 
     def __init__(self):
-        super(ApplicationPlugin, self).__init__()
-        # Add widgets
-        self.add_widget(ApplicationListWidget)
+        super(InfrastructurePlugin, self).__init__()
         # Add urlpattern
         self.add_urlpattern(urlpatterns)
 
 # Register plugin
-manager.plugins.register('applications', ApplicationPlugin)
+manager.plugins.register('infrastructure', InfrastructurePlugin)

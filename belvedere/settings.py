@@ -205,6 +205,11 @@ INSTALLED_APPS = (
 
     # plugins
     'belvedere.apps.applications',
+    'belvedere.apps.infrastructure',
+    'belvedere.apps.packages',
+
+    # scenic
+    'scenic',
 )
 ########## END APP CONFIGURATION
 

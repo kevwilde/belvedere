@@ -4,9 +4,10 @@ from django.template import loader
 
 class PluginDefinition(object):
 
-    _short = None
-    _widgets = []
-    _urlpattern = None
+    def __init__(self):
+        self._short = None
+        self._widgets = []
+        self._urlpattern = None
 
     def add_widget(self, widget_cls):
         inst = widget_cls()
@@ -26,6 +27,7 @@ class PluginDefinition(object):
 
     def get_short(self):
         return self._short
+
 
 class Widget(object):
     title = None

@@ -21,6 +21,9 @@ urlpatterns = patterns('',
     # Admin
     url(r'^admin/', include(admin.site.urls)),
 
+    # Scenic
+    url(r'^_scenic/', include('scenic.urls')),
+
 )
 
 # Add plugin urls
