@@ -1,4 +1,4 @@
 #
-## load widgetmanager early to allow registration of widgets
+## load plugins early to allow registration of plugins
 #
-#import widgetmanager
+#import plugins

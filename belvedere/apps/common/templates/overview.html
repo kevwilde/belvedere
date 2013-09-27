@@ -2,8 +2,14 @@
 
 {% block content %}
 
+<div class="widget-collection">
+    <div class="row">
     {% for widget in widgets %}
-        {{ widget.render }}
+        <div class="col-md-4">
+            {{ widget.render }}
+        </div>
     {% endfor %}
+    </div>
+</div>
 
 {% endblock %}
