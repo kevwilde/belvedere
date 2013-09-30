@@ -16,6 +16,9 @@ class PluginDefinition(object):
     def get_widgets(self):
         return self._widgets
 
+    def get_navigation(self):
+        return ()
+
     def add_urlpattern(self, urlpattern):
         self._urlpattern = urlpattern
 

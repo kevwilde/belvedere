@@ -9,7 +9,10 @@ class WidgetOverview(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(WidgetOverview, self).get_context_data(**kwargs)
         widgets = []
+
         for plugin in manager.plugins.get_plugins():
+            # plugin widgets
             widgets += plugin.get_widgets()
         context['widgets'] = widgets
+
         return context

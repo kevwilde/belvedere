@@ -7,6 +7,7 @@ by Belvedere. It will then try to register it as a plugin, searching for
 widgets and urlpatterns.
 
 """
+from django.core.urlresolvers import reverse
 from .urls import urlpatterns
 
 from apps.common.plugins import manager
@@ -19,6 +20,11 @@ class PackagesPlugin(PluginDefinition):
         super(PackagesPlugin, self).__init__()
         # Add urlpattern
         self.add_urlpattern(urlpatterns)
+
+    def get_navigation(self):
+        return (
+            ('Packages', reverse('pkgs-installed')),
+        )
 
 # Register plugin
 manager.plugins.register('packages', PackagesPlugin)
