@@ -10,9 +10,7 @@ class ApplicationEndpoint(models.Model):
     URI = models.CharField(max_length=200)
 
     def __unicode__(self):
-        hostnames = [d.server.hostname for d in self.deployment.all()]
-
-        return "{0}".format(self.URI)
+        return self.URI
 
 
 class Deployment(models.Model):
@@ -33,6 +31,16 @@ class Server(models.Model):
     """
     hostname = models.CharField(max_length=100)
     environment = models.ForeignKey('Environment')
+
+    def installed_applications(self):
+        """
+        Returns a list of installed applications on the server
+        """
+        deployments = self.deployment_set.all()
+        return [d.application for d in deployments]
+
+    def short_hostname(self):
+        return self.hostname.split('.')[0]
 
     def __unicode__(self):
         return "{0} [{1}]".format(self.hostname, self.environment.name)

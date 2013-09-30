@@ -1,7 +1,10 @@
 @import "flatly.css";
 
 // background colors
-@widgetHeaderBackground: #18bc9c;
+@darkBackground: #2c3e50;
+@lightBackground:#18bc9c;
+
+@widgetHeaderBackground: @lightBackground;
 
 // font
 @fancyFont: 'Handlee', cursive;
@@ -18,6 +21,17 @@ body {
 .navbar-brand {
   font-family: @fancyFont;
   font-weight: bold;
+}
+
+// table
+
+.tr-h1 {
+  background-color: @darkBackground;
+  color: #ffffff;
+}
+.tr-h2 {
+  background-color: @lightBackground;
+  color: #ffffff;
 }
 
 // widgets

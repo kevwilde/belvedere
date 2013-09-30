@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% load belvedere_tags package_tags %}
+
+{% block content %}
+
+    <h2>Installed Packages</h2>
+
+    {% regroup object_list by environment as environment_grouped  %}
+
+    <table class="table table-bordered">
+        <thead>
+
+{#      Environments line  #}
+        <tr class="tr-h1">
+            <th>&nbsp;</th>
+            {% for environment in environment_grouped %}
+            <th colspan="{{ environment.list|length }}">
+                {{ environment.grouper }}
+            </th>
+            {% endfor %}
+        </tr>
+
+{#      Servers line  #}
+        <tr class="tr-h2">
+            <th>&nbsp;</th>
+            {% for server in object_list %}
+            <th>{{ server.short_hostname }}</th>
+            {% endfor %}
+        </tr>
+        </thead>
+
+        <tbody>
+
+    {% regroup package_list|dictsort:'application' by application as packages_by_application %}
+
+    {% for application in packages_by_application %}
+
+{#      Application line  #}
+        <tr>
+            <th>{{ application.grouper }}</th>
+            <td colspan="{{ object_list|length }}"
+        </tr>
+
+{#      Package lines  #}
+        {% for package in application.list %}
+        <tr>
+            <td class="text-right">{{ package }}</td>
+
+            {% for server in object_list %}
+
+{#              Application is monitored on this server  #}
+                {% if application.grouper in server.installed_applications %}
+
+                    {% with server|package_info:package as package_info %}
+                        <td>
+                            {{ package_info.version|default_if_none:"Not installed"|default:"Unknown" }}
+                        </td>
+                    {% endwith %}
+
+{#              Application is not monitored on this server  #}
+                {% else %}
+                    <td>
+                        Not deployed.
+                    </td>
+                {% endif %}
+
+            {% endfor %}
+
+        </tr>
+        {% endfor %}
+
+
+    {% endfor %}
+        </tbody>
+
+    </table>
+
+
+{% endblock %}
