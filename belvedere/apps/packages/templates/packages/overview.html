@@ -34,7 +34,7 @@
 
         <tbody>
 
-    {% regroup package_list|dictsort:'application' by application as packages_by_application %}
+    {% regroup package_list|dictsort:'application.id' by application as packages_by_application %}
 
     {% for application in packages_by_application %}
 
@@ -72,8 +72,30 @@
         </tr>
         {% endfor %}
 
-
     {% endfor %}
+
+{#  Generic packages  #}
+    <tr>
+        <th>system packages</th>
+    </tr>
+    {% for generic_package in generic_list %}
+        <tr>
+            <td class="text-right">
+                {{ generic_package }}
+            </td>
+            {% for server in object_list %}
+
+                {% with server|package_info:generic_package as package_info %}
+                    <td>
+                        {{ package_info.version|default_if_none:"Not installed"|default:"Unknown" }}
+                    </td>
+                {% endwith %}
+
+            {% endfor %}
+
+        </tr>
+    {% endfor %}
+
         </tbody>
 
     </table>

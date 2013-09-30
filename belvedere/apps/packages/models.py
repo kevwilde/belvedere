@@ -8,7 +8,7 @@ class SystemPackage(models.Model):
     """
     name = models.CharField(max_length=64)
 
-    application = models.ForeignKey(Application)
+    application = models.ForeignKey(Application, null=True, blank=True)
 
     def __unicode__(self):
         return self.name
